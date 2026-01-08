@@ -14,17 +14,15 @@ export class TextBox extends LayoutContainer {
   private textNode: Text;
   constructor(boxOpts: LayoutContainerOptions = {}, textOpts: TextOptions = {}) {
     super(boxOpts);
-    this.layout = {
-        width:"50%",
-        height:"30%",
-        padding: 12,
-        backgroundColor:"red"
-    }
     const { text = "Hello PixiJS!", style = {} } = textOpts;
     this.textNode = new Text({
       text,
       style: { ...defaultTextBoxStyle, ...style },
     });
+    this.textNode.layout = true
     this.addChild(this.textNode);
+  }
+  public updateText(text:string): void {
+    this.textNode.text = text;
   }
 }

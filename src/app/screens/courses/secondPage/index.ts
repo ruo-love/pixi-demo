@@ -1,111 +1,163 @@
 import { animate } from "motion";
 import type { ObjectTarget } from "motion/react";
-import { Container, Graphics, Sprite } from "pixi.js";
-import { TextBox } from "../../../ui/TextBox";
+import { Container, Sprite, Texture } from "pixi.js";
+import { gsap } from "gsap";
+import { EmojiCard } from "./EmojiCard";
 import { engine } from "../../../getEngine";
+import { ThirdPage } from "../thirdPage";
 
 /** Screen shown while loading assets */
 export class SecondPage extends Container {
     /** Assets bundles required by this screen */
     public static assetBundles = ["course"];
-    private background!: Graphics;
-    private bg_1!: Graphics;
-    private bg_2!: Graphics;
-    private bg_3!: Graphics;
-    private bot!: Sprite;
-    private textBox?: TextBox;
-    private circle!: Sprite;
+    private background: Sprite
+    private role: Sprite
+    private xImage?: Sprite
+    private status: "idle" | "working"|"end" = "idle"
+    private emojiCard?:EmojiCard
     constructor() {
         super();
-        this.initBg()
-        this.initBot()
-    }
-    public initBot(){
-        this.bot = Sprite.from("course/page_2_bot.png");
-        this.bot.anchor.set(0.5);
-        this.bot.interactive = true;
-        this.bot.cursor = 'pointer'; // 鼠标移上去变手型
-       
-        // 添加点击事件
-        this.bot.on('pointertap', async () => {
-            if(this.textBox) return
-            const targetRotation = this.circle.rotation + Math.PI * 2;
-            animate(
-                this.circle.position,
-                { x: -30, y: 280 } as any,
-                {
-                    duration: 1.5,
-                    ease: "backOut", // 使用 backOut 会有一个超出的回弹效果，更生动
-                },
-            );
-            animate(
-                this.circle,
-                { alpha: 1, rotation: targetRotation } as any,
-                {
-                    duration: 1.5,
-                    ease: "backOut",
-                },
-            );
-            this.textBox = new TextBox({},{
-                text: "Hello World!",
-                style: {
-                    fill: "#000",
-                    align: "center",
-                    fontSize: 40,
-                    stroke:10,
-                    fontFamily: "\"Comic Sans MS\", cursive, sans-serif",
+        this.loadData()
+        
+        // 页面背景
+        this.background = Sprite.from("course/page_2_bg.jpg");
+        this.background.anchor.set(0.5);
+        this.background.layout = {
+            width: "100%",
+            height: "100%",
+            objectFit: "fill",
+            objectPosition: "center",
+        }
+        this.addChild(this.background);
 
-                },
-            });
-            this.textBox.position.set(this.bot.width * 0.5+this.textBox.width*.8, this.bot.height+this.textBox.height*.76)
-            this.addChild(this.textBox)
-        });
-        this.addChild(this.bot);
-        this.circle = Sprite.from("course/page_2_a.png");
-        this.circle.alpha = 1;
-        this.circle.anchor.set(0.5);
-        this.circle.position.set(-80, 230)
-        this.bot.addChild(this.circle);
-
-
-    }
-    public initBg(){
-       this.background = new Graphics();
-       this.bg_1 = new Graphics();
-       this.bg_2 = new Graphics();
-       this.bg_3 = new Graphics();
-       this.addChild(this.background)
-       this.background.addChild(this.bg_1)
-       this.background.addChild(this.bg_2)
-       this.background.addChild(this.bg_3)
-
+        this.role = Sprite.from("course/page_2_role.png");
+        this.role.anchor.set(0.5);
+        this.addChild(this.role);
+        this.role.on("pointertap", () => {
+            this.start()
+        })
     }
 
     public onLoad(progress: number) {
         console.log("progress", progress)
     }
-
+    private loadData(){
+        return [{
+            value: "Upset",
+            name: "难过",
+            icon: "course/page_2_emoj_1.png"
+        },
+        {
+            value: "Smile",
+            name: "微笑",
+            icon: "course/page_2_emoj_2.png"
+        },
+        {
+            value: "Embarrassed",
+            name: "尴尬",
+            icon: "course/page_2_emoj_3.png"
+        }]
+    }
+    private start(){
+        this.next()
+    }
+    private async next(){
+        if(this.status == "working") return
+        this.status = "working"
+        await this.showXImage()
+        this.showEmojIcon()
+    }
+    private showEmojIcon(){
+        if(this.emojiCard){
+            this.emojiCard.switch()
+            if( this.xImage){
+                this.xImage.visible = false
+            }
+        }else{
+            const data = this.loadData()
+            this.emojiCard = new EmojiCard(data,{
+                size:86,
+                onEnd:()=>{
+                    this.status = "end"
+                    engine().navigation.showScreen(ThirdPage);
+                },
+                onSwitchEnd:()=>{
+                    this.status = "idle"
+                    if( this.xImage){
+                        this.xImage.visible = true
+                    }
+                }
+            })
+            this.emojiCard.position.set(-40,-this.role.height * 0.27)
+            this.role.addChild(this.emojiCard)
+            this.emojiCard.switch()
+            if( this.xImage){
+                this.xImage.visible = false
+            }
+        }
+    }
+    private async showXImage(){
+        const xImg = this.getRandomXImg();
+        if (!this.xImage) {
+            this.xImage = Sprite.from(xImg);
+            this.xImage.anchor.set(0.5);
+            this.xImage.alpha = 1;
+            this.xImage.eventMode = "static";
+            this.xImage.cursor = 'pointer';
+            this.xImage.position.set(-this.xImage.width * 0.3, -this.role.height * 0.27);
+            this.xImage.on("pointertap", (e) => {
+                e.stopPropagation();
+                this.next();
+            });
+            this.role.addChild(this.xImage);
+            await this.playXSequence(0.23);
+            return;
+        }
+        await this.playXSequence(0.23);
+    }
+    private async playXSequence(duration: number) {
+        if (!this.xImage) return;
+        for (let i = 1; i <= 3; i++) {
+            this.xImage.texture = Texture.from(`course/page_2_x_${i}.png`);
+            this.xImage.width = 88;
+            this.xImage.height = 94;
+            await gsap.to(this.xImage, {
+                rotation: 0.32,
+                duration,
+                yoyo: true,
+                repeat: 3,
+                ease: "sine.inOut",
+            });
+        }
+    }
+    private getRandomXImg(){
+       const index = Math.floor(Math.random() * 3) + 1;
+       return `course/page_2_x_${index}.png`
+    }
     /** Resize the screen, fired whenever window size changes  */
     public resize(width: number, height: number) {
-        this.background.clear();
-        this.background.beginPath()
-        .rect(0, 0, width, height) // 从 0,0 开始画到满屏
-        .fill(0xf7d056);
-        this.bg_1.beginPath()
-        .rect(0, height*0.25, width, height*0.25) // 从 0,0 开始画到满屏
-        .fill(0xe88a75);
-        this.bg_2.beginPath()
-        .rect(0, height*0.25*2, width, height*0.25) // 从 0,0 开始画到满屏
-        .fill(0xf1cdb2);
-        this.bg_3.beginPath()
-        .rect(0, height*0.25*3, width, height*0.25) // 从 0,0 开始画到满屏
-        .fill(0x6a99d2);
-        this.bot.position.set(width * 0.2, height * 0.5);
+        this.layout = { width, height };
+        this.role.position.set(width * 0.5, height * 0.65);
     }
 
     /** Show screen with animations */
     public async show() {
         this.alpha = 1;
+        gsap.fromTo(
+            this.role,
+            { alpha: 0, scale: 0,translateZ:-1 },
+            {
+                alpha: 1,
+                translateZ:2,
+                scale: 1,
+                duration: 1.5,
+                ease: "back.in",
+                onComplete:()=>{
+                    this.role.interactive = true;
+                    this.role.cursor = 'pointer';
+                }
+            },
+        );
 
     }
 
@@ -118,3 +170,5 @@ export class SecondPage extends Container {
         });
     }
 }
+
+

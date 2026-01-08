@@ -7,8 +7,7 @@ import { FirstPage } from "./app/screens/courses/firstPage";
 import { SecondPage } from "./app/screens/courses/secondPage";
 import { userSettings } from "./app/utils/userSettings";
 import { CreationEngine } from "./engine/engine";
-import { Assets, Container, Sprite, Text } from 'pixi.js';
-
+import { ThirdPage } from './app/screens/courses/thirdPage';
 
 
 /**
@@ -24,7 +23,7 @@ setEngine(engine);
   // Initialize the creation engine instance
   await engine.init({
     background: "#1E1E1E",
-    resizeOptions: { minWidth: 768, minHeight: 1024, letterbox: false }
+    resizeOptions: { minWidth: 768, minHeight: 1024, letterbox: false },
   });
   // Initialize the user settings
   userSettings.init();
