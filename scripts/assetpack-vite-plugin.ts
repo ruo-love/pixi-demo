@@ -2,6 +2,8 @@
 import type { AssetPackConfig } from "@assetpack/core";
 import { AssetPack } from "@assetpack/core";
 import { pixiPipes } from "@assetpack/core/pixi";
+import { spineAtlasManifestMod } from "@assetpack/core/spine";
+
 import type { Plugin, ResolvedConfig } from "vite";
 
 export function assetpackPlugin() {
@@ -9,11 +11,14 @@ export function assetpackPlugin() {
     entry: "./raw-assets",
     pipes: [
       ...pixiPipes({
-        cacheBust: false,
+        cacheBust: true,
         manifest: {
           output: "./src/manifest.json",
+           createShortcuts:true,
+            trimExtensions:true
         },
       }),
+      spineAtlasManifestMod(),
     ],
   } as AssetPackConfig;
   let mode: ResolvedConfig["command"];
