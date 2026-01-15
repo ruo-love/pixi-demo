@@ -2,6 +2,7 @@
 import type { AssetPackConfig } from "@assetpack/core";
 import { AssetPack } from "@assetpack/core";
 import { pixiPipes } from "@assetpack/core/pixi";
+import path from "path";
 import type { Plugin, ResolvedConfig } from "vite";
 
 export function assetpackPlugin() {
@@ -23,16 +24,12 @@ export function assetpackPlugin() {
     name: "vite-plugin-assetpack",
     configResolved(resolvedConfig) {
       mode = resolvedConfig.command;
-      if (!resolvedConfig.publicDir) return;
       if (apConfig.output) return;
-      // remove the root from the public dir
-      const publicDir = resolvedConfig.publicDir.replace(process.cwd(), "");
-
-      if (process.platform === "win32") {
-        apConfig.output = `${publicDir}/assets/`;
-      } else {
-        apConfig.output = `.${publicDir}/assets/`;
-      }
+      const publicDir = resolvedConfig.publicDir || "public";
+      const publicDirPath = path.isAbsolute(publicDir)
+        ? publicDir
+        : path.resolve(resolvedConfig.root ?? process.cwd(), publicDir);
+      apConfig.output = path.join(publicDirPath, "assets");
     },
     buildStart: async () => {
       if (mode === "serve") {
