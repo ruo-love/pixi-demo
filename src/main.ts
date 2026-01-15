@@ -1,35 +1,39 @@
-import '@pixi/layout';
-import "@pixi/sound";
-import { setEngine } from "./app/getEngine";
-// import { LoadScreen } from "./app/screens/LoadScreen";
-// import { MainScreen } from "./app/screens/main/MainScreen";
-import { FirstPage } from "./app/screens/courses/firstPage";
-import { SecondPage } from "./app/screens/courses/secondPage";
-import { userSettings } from "./app/utils/userSettings";
-import { CreationEngine } from "./engine/engine";
-import { ThirdPage } from './app/screens/courses/thirdPage';
+import * as PIXI from "pixi.js"
+import {Spine} from '@pixi-spine/all-3.8' // Do this once at the very start of your code. This registers the loader!
 
+window.onload = async function () {
+  const app = new PIXI.Application();
+  const root = document.getElementById("pixi-container");
+  root.appendChild(app.view);
 
-/**
- * Importing these modules will automatically register there plugins with the engine.
- */
-// import "@esotericsoftware/spine-pixi-v8";
+  try {
+    const resource = await PIXI.Assets.load('/tree/tree.json');
+    console.log("加载成功:", resource);
 
-// Create a new creation engine instance
-const engine = new CreationEngine();
-setEngine(engine);
+    // 3. 创建 Spine 实例
+    // 在 UMD 版本中，Spine 通常挂载在 PIXI.spine.Spine
+    const tree = new Spine(resource.spineData);
 
-(async () => {
-  // Initialize the creation engine instance
-  await engine.init({
-    background: "#1E1E1E",
-    resizeOptions: { minWidth: 768, minHeight: 1024, letterbox: false },
-  });
-  // Initialize the user settings
-  userSettings.init();
-  await engine.navigation.showScreen(FirstPage);
-  // Show the load screen
+    // 设置位置
+    tree.x = app.screen.width / 4+100;
+    tree.y = 400; // 稍微向上一点
+    tree.scale.set(.5);
 
-  // Show the main screen once the load screen is dismissed
-  // await engine.navigation.showScreen(MainScreen);
-})();
+    // 4. 播放动画
+    if (tree.state.hasAnimation('animation')) {
+      tree.state.setAnimation(0, 'animation', true);
+    }
+
+    app.stage.addChild(tree);
+
+    // 5. 交互逻辑 (v7 建议开启 eventMode)
+    app.stage.eventMode = 'static';
+    app.stage.on('pointerdown', () => {
+      console.log("Clicked!");
+      tree.state.setAnimation(0, 'animation', true);
+    });
+
+  } catch (error) {
+    console.error("资源加载失败:", error);
+  }
+}

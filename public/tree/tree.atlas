@@ -1,0 +1,160 @@
+
+tree.png
+size: 1715,440
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tree0001
+  rotate: false
+  xy: 2, 102
+  size: 187, 336
+  orig: 187, 336
+  offset: 0, 0
+  index: -1
+tree0002
+  rotate: true
+  xy: 1505, 219
+  size: 117, 208
+  orig: 117, 208
+  offset: 0, 0
+  index: -1
+tree0003
+  rotate: true
+  xy: 1010, 2
+  size: 200, 203
+  orig: 200, 203
+  offset: 0, 0
+  index: -1
+tree0004
+  rotate: true
+  xy: 752, 194
+  size: 244, 214
+  orig: 244, 214
+  offset: 0, 0
+  index: -1
+tree0005
+  rotate: true
+  xy: 968, 204
+  size: 234, 145
+  orig: 234, 145
+  offset: 0, 0
+  index: -1
+tree0006
+  rotate: false
+  xy: 335, 3
+  size: 127, 133
+  orig: 129, 135
+  offset: 1, 1
+  index: -1
+tree0007
+  rotate: true
+  xy: 1441, 71
+  size: 131, 129
+  orig: 133, 131
+  offset: 1, 1
+  index: -1
+tree0008
+  rotate: true
+  xy: 1215, 35
+  size: 167, 70
+  orig: 167, 70
+  offset: 0, 0
+  index: -1
+tree0009
+  rotate: false
+  xy: 191, 138
+  size: 234, 300
+  orig: 234, 300
+  offset: 0, 0
+  index: -1
+tree0010
+  rotate: true
+  xy: 920, 24
+  size: 168, 88
+  orig: 168, 88
+  offset: 0, 0
+  index: -1
+tree0011
+  rotate: true
+  xy: 1287, 40
+  size: 162, 152
+  orig: 162, 152
+  offset: 0, 0
+  index: -1
+tree0012
+  rotate: true
+  xy: 464, 3
+  size: 168, 144
+  orig: 168, 144
+  offset: 0, 0
+  index: -1
+tree0013
+  rotate: false
+  xy: 1115, 204
+  size: 128, 132
+  orig: 130, 134
+  offset: 1, 1
+  index: -1
+tree0014
+  rotate: true
+  xy: 788, 18
+  size: 174, 130
+  orig: 174, 130
+  offset: 0, 0
+  index: -1
+tree0015
+  rotate: false
+  xy: 610, 2
+  size: 176, 174
+  orig: 176, 174
+  offset: 0, 0
+  index: -1
+tree0016
+  rotate: true
+  xy: 1215, 338
+  size: 100, 489
+  orig: 100, 489
+  offset: 0, 0
+  index: -1
+tree0017
+  rotate: true
+  xy: 427, 173
+  size: 265, 164
+  orig: 265, 164
+  offset: 0, 0
+  index: -1
+tree0018
+  rotate: true
+  xy: 593, 178
+  size: 260, 157
+  orig: 260, 157
+  offset: 0, 0
+  index: -1
+tree0019
+  rotate: false
+  xy: 1245, 204
+  size: 128, 132
+  orig: 130, 134
+  offset: 1, 1
+  index: -1
+tree0020
+  rotate: false
+  xy: 1375, 204
+  size: 128, 132
+  orig: 130, 134
+  offset: 1, 1
+  index: -1
+tree0021
+  rotate: true
+  xy: 1572, 88
+  size: 129, 131
+  orig: 131, 133
+  offset: 1, 1
+  index: -1
+tree0022
+  rotate: false
+  xy: 2, 6
+  size: 331, 94
+  orig: 333, 96
+  offset: 1, 1
+  index: -1
