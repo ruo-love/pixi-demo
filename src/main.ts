@@ -15,9 +15,9 @@ window.onload = async function () {
     const tree = new Spine(resource.spineData);
 
     // 设置位置
-    tree.x = app.screen.width / 4+100;
-    tree.y = 400; // 稍微向上一点
-    tree.scale.set(.5);
+    tree.x = app.screen.width / 2;
+    tree.y = app.screen.height * 0.8; // 稍微向上一点
+    tree.scale.set(1.5);
 
     // 4. 播放动画
     if (tree.state.hasAnimation('animation')) {
