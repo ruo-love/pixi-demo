@@ -12,6 +12,7 @@
   "dependencies": {
     "@esotericsoftware/spine-pixi-v7": "^4.2.98",
     "@pixi-spine/all-3.8": "^4.0.6",
+    "@pixi/sound": "^5.2.3",
     "@vitejs/plugin-legacy": "^6.1.1",
     "gsap": "^3.14.2",
     "inject-vc-vite-plugin": "^1.1.15",
