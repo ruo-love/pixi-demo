@@ -28,6 +28,18 @@ const animationMap = {
   spawn: {
     name: 'portal',
   },
+  death: {
+    name: 'death',
+    timeScale: 1.5,
+  },
+  aim: {
+    name: 'aim',
+    timeScale: 1.5,
+  },
+  shoot: {
+    name: 'shoot',
+    timeScale: 1.5,
+  },
 };
 
 // Class for handling the character Spine and its animations.
@@ -39,6 +51,9 @@ export class SpineBoy {
       run: false,
       hover: false,
       jump: false,
+      death: false,
+      aim: false,
+      shoot: false,
     };
 
     // Create the main view and a nested view for directional scaling.
@@ -80,6 +95,15 @@ export class SpineBoy {
   }
 
   update() {
+    if (this.state.death) this.playAnimation(animationMap.death);
+    if (this.isAnimationPlaying(animationMap.death)) return;
+
+    if (this.state.shoot) this.playAnimation(animationMap.shoot);
+    if (this.isAnimationPlaying(animationMap.shoot)) return;
+
+    if (this.state.aim) this.playAnimation(animationMap.aim);
+    if (this.isAnimationPlaying(animationMap.aim)) return;
+
     // Play the jump animation if not already playing.
     if (this.state.jump) this.playAnimation(animationMap.jump);
 
@@ -90,7 +114,6 @@ export class SpineBoy {
     if (this.state.hover) this.playAnimation(animationMap.hover);
     else if (this.state.run) this.playAnimation(animationMap.run);
     else if (this.state.walk) this.playAnimation(animationMap.walk);
-    else this.playAnimation(animationMap.idle);
   }
 
   isSpawning() {
