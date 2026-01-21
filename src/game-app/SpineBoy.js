@@ -80,6 +80,7 @@ export class SpineBoy {
   // Play the portal-in spawn animation.
   spawn() {
     this.spine.state.setAnimation(0, animationMap.spawn.name);
+    this.spine.state.addAnimation(0, "idle", true, 0)
   }
 
   // Play the spine animation.

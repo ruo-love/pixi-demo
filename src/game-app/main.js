@@ -51,6 +51,7 @@ import gsap from 'gsap';
     // Trigger character's spawn animation.
     spineBoy.spawn();
     bot.spawn();
+  
     function loadWords() {
         const data = [{
             value: "apple",
@@ -89,7 +90,6 @@ import gsap from 'gsap';
                 onComplete: () => {
                     spineBoy.state.hover = false
                     const spineBoyEntry = spineBoy.spine.state.setAnimation(0, "jump", false);
-                    spineBoyEntry.timeScale = 0.9
                     const jumpDuration = spineBoyEntry.animation.duration;
                     const halfTime = jumpDuration * 0.5;
                     const shootEntry = spineBoy.spine.state.addAnimation(0, "shoot", false, -halfTime)
@@ -97,7 +97,7 @@ import gsap from 'gsap';
                     shootEntry.listener = {
                         start: () => {
                             const entry = bot.spine.state.setAnimation(0, "death", false);
-                            entry.timeScale = 0.5;
+                            entry.timeScale = 1;
                         }
                     };
                 },
@@ -116,7 +116,7 @@ import gsap from 'gsap';
                     shootEntry.listener = {
                         start: () => {
                             const entry = spineBoy.spine.state.setAnimation(0, "death", false);
-                            entry.timeScale = 0.5;
+                            entry.timeScale = 1;
                         }
                     };
                 },
