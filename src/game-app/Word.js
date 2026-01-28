@@ -51,7 +51,7 @@ export default class Word extends Container{
         const wordShadow = new Text({
             text: word,
             style: {
-                fill: 0x000000,
+                fill: "#f7cc50",
                 fontFamily: "Trebuchet MS, Arial, sans-serif",
                 fontSize: 30,
                 fontWeight: "700",
@@ -66,7 +66,7 @@ export default class Word extends Container{
         this.wordText = new Text({
             text: word,
             style: {
-                fill: border,
+                fill: "#f7cc50",
                 fontFamily: "Trebuchet MS, Arial, sans-serif",
                 fontSize: 30,
                 fontWeight: "700",

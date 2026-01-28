@@ -1,4 +1,6 @@
 
+import "../canvas-text-metrics-polyfill";
+import * as PIXI from 'pixi.js';
 import { Application, Assets, Container, Sprite, Texture } from 'pixi.js';
 import '@esotericsoftware/spine-pixi-v8';
 import { Controller } from './Controller';
@@ -9,6 +11,10 @@ import Word from './Word';
 import gsap from 'gsap';
 // Asynchronous IIFE
 (async () => {
+    PIXI.Color.prototype.toHexa = function toHexa() {
+        return this.toRgbaString(); // 输出如"rgba(255, 255, 255, 1)"的格式
+    };
+    console.log(PIXI,"PIXI")
     // Create a PixiJS application.
     const app = new Application();
 
