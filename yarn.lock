@@ -1963,10 +1963,30 @@
   resolved "https://registry.npmjs.org/@pixi-spine/loader-base/-/loader-base-4.0.6.tgz"
   integrity sha512-sdbT1fbjHJFxESn8R2vulIyPu6xVBocJhrfs/kdpEWmsGUHTFdh7ANKaCqvXPvQh6wO5tgJNGhuLxtSu8VNzYg==
 
+"@pixi-spine/loader-uni@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.npmjs.org/@pixi-spine/loader-uni/-/loader-uni-4.0.6.tgz"
+  integrity sha512-DCu4YRVXoC/BGyxVVlWiaFs/4H62PbM6vx6OiH/Xt5PYSvYSAFlM/GnYRabgvFD0W1iOHQxfY4F7jdz8SjNs4Q==
+
+"@pixi-spine/runtime-3.7@^4.0.0", "@pixi-spine/runtime-3.7@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.npmjs.org/@pixi-spine/runtime-3.7/-/runtime-3.7-4.0.6.tgz"
+  integrity sha512-bl2I0PsECKKncfLjH2xUggNcnzRTVCBQGGLHLxhUJsiOqQ56VY5eFHPpkf91Pk2fZN6P9X+RNvZntW7Z5GKQRQ==
+
 "@pixi-spine/runtime-3.8@^4.0.0", "@pixi-spine/runtime-3.8@^4.0.6":
   version "4.0.6"
   resolved "https://registry.npmjs.org/@pixi-spine/runtime-3.8/-/runtime-3.8-4.0.6.tgz"
   integrity sha512-caHEFt7Iwzercec5cOI+Sf2tzOT4ejNAn6ZjBurWAEeXZ8YCaj41PTnlnJAh6ex80AP3WWFJcbnqcXV/6G0sMA==
+
+"@pixi-spine/runtime-4.0@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.npmjs.org/@pixi-spine/runtime-4.0/-/runtime-4.0-4.0.6.tgz"
+  integrity sha512-C4aHtbpg0UNmCd/0zS2SQ96fdcrwpx0AkHBi3TO/JXbh6fM6DQOObV+EXtxTNIY8Y/ntJtqM3Rz5d1pmgY6d3g==
+
+"@pixi-spine/runtime-4.1@^4.0.0", "@pixi-spine/runtime-4.1@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.npmjs.org/@pixi-spine/runtime-4.1/-/runtime-4.1-4.0.6.tgz"
+  integrity sha512-hiX6of8Usll/zIubGB5ufPY0JaBGt0Yvpc0zEXCtxyWCx3habp8XtPNta3MmEQUVChD0nX5yks8vtzxAahFJew==
 
 "@pixi/accessibility@7.4.3":
   version "7.4.3"
@@ -4189,6 +4209,19 @@ pixelmatch@^5.3.0:
   integrity sha512-o8mkY4E/+LNUf6LzX96ht6k6CEDi65k9G2rjMtBe9Oo+VPKSvl+0GKHuH/AlG+GA5LPG/i5hrekkxUc3s2HU+Q==
   dependencies:
     pngjs "^6.0.0"
+
+pixi-spine@4.0.6:
+  version "4.0.6"
+  resolved "https://registry.npmjs.org/pixi-spine/-/pixi-spine-4.0.6.tgz"
+  integrity sha512-LeMvCStLs5kHDpIRXUizuRwYshIk4Ma5tHVkxH1cYG3k/+a+Iqy1KSBHiKewtoedWznAvxwjoYZD67ZGvUtb2Q==
+  dependencies:
+    "@pixi-spine/base" "^4.0.6"
+    "@pixi-spine/loader-base" "^4.0.6"
+    "@pixi-spine/loader-uni" "^4.0.6"
+    "@pixi-spine/runtime-3.7" "^4.0.6"
+    "@pixi-spine/runtime-3.8" "^4.0.6"
+    "@pixi-spine/runtime-4.0" "^4.0.6"
+    "@pixi-spine/runtime-4.1" "^4.0.6"
 
 pixi.js-legacy@^7.4.3:
   version "7.4.3"

@@ -15,7 +15,7 @@ export function assetpackPlugin() {
         manifest: {
           output: "./src/manifest.json",
            createShortcuts:true,
-            trimExtensions:true
+          trimExtensions:true
         },
       }),
       spineAtlasManifestMod(),

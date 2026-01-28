@@ -6,7 +6,7 @@ export default defineConfig({
   root: "./",
   base: "./",
   plugins: [
-    assetpackPlugin(),
+    // assetpackPlugin(),
     legacy({
             targets: [
                 "last 2 versions",

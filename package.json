@@ -18,6 +18,7 @@
     "inject-vc-vite-plugin": "^1.1.15",
     "matter-js": "^0.20.0",
     "motion": "^12.4.7",
+    "pixi-spine": "4.0.6",
     "pixi.js": "^7.4.3",
     "pixi.js-legacy": "^7.4.3"
   },
