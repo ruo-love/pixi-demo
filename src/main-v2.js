@@ -1,9 +1,9 @@
 
-import * as PIXI from "pixi.js"
-import {Spine}from'@pixi-spine/all-3.8';
+import * as PIXI from "pixi.js-legacy" //pixi-v7
+import {Spine}from'@esotericsoftware/spine-pixi-v7'; 
 window.onload = async function () {
   const app = new PIXI.Application({
-    backgroundColor: "#fff",
+    backgroundColor: "#282a35",
     resizeTo: window
   });
   app.stage.eventMode = "static";
@@ -14,17 +14,24 @@ window.onload = async function () {
   const world = new PIXI.Container();
   world.eventMode = "static";
   app.stage.addChild(world)
-
-  PIXI.Assets.load("./tree/tree.json").then((res) => {
-    const tree = new Spine(res.spineData);
-    tree.alpha = 1;
-    tree.eventMode = "static";  // 开启交互
-    tree.cursor = "pointer"
-    tree.x = app.screen.width / 2;
-    tree.y = app.screen.height * 0.6;
-    tree.on("pointerdown",()=>{
-      tree.state.setAnimation(0, "shake", false)
-    })
-    world.addChild(tree);
+  await PIXI.Assets.load([
+    './spineboy/spineboy-pro.skel',
+    './spineboy/spineboy-pma.atlas',
+    './spineboy/spineboy-pma.png',
+  ]);
+  const spine = Spine.from({
+      skeleton: './spineboy/spineboy-pro.skel',
+      atlas: './spineboy/spineboy-pma.atlas',
+      scale:0.6
   });
+  spine.x=app.screen.width/2
+  spine.y=app.screen.height/2+100
+  spine.state.setAnimation(0,"walk",true)
+
+  const text = new PIXI.Text("测试文本兼容性",{
+    fill:"#fff"
+  })
+  text.x = spine.x -text.width/2
+  text.y = spine.y +20
+  world.addChild(spine,text)
 }
